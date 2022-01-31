@@ -34,9 +34,9 @@ def download_video_ydl(video_url):
 
 # As youtube-dl is discontinued, you can use this function to download with pytube alternatively
 def download_video_pytube(video_url):
-    target_path = os.path.join(sys.path[0],'videos')
+    target_path = os.path.join(sys.path[0],'videos2')
     try:
-        yt = YouTube(video_url,on_progress_callback=on_progress).streams.filter(only_audio=True,adaptive=True).order_by('abr').desc().first()
+        yt = YouTube(video_url,on_progress_callback=on_progress).streams.filter(only_audio=True).first()
         out_file = yt.download(output_path=target_path)
         base, ext = os.path.splitext(out_file)
         new_file = base + '.mp3'
