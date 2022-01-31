@@ -1,5 +1,5 @@
 
-# Youtube list to mp3 download
+# Youtube list to mp3 downloader
 
 Tiny script to convert a list of youtube videos to mp3. The list should be stored in a file named ```url_list.txt```.
 
