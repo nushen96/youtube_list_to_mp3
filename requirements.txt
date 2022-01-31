@@ -1,0 +1,3 @@
+youtube_dl
+bs4
+requests
