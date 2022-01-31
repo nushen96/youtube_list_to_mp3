@@ -14,6 +14,11 @@ def download_video(video_url):
             'format':'bestaudio/best',
             'keepvideo':False,
             'outtmpl':filename,
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }]
         }
 
         with youtube_dl.YoutubeDL(options) as ydl:
