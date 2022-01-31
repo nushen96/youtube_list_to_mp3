@@ -3,8 +3,12 @@ import youtube_dl
 import requests
 from bs4 import BeautifulSoup
 import concurrent.futures
+from pytube import YouTube
+from pytube.cli import on_progress
+import os
+import sys
 
-def download_video(video_url):
+def download_video_ydl(video_url):
     try:
         video_info = youtube_dl.YoutubeDL().extract_info(
             url = video_url,download=False
@@ -25,6 +29,18 @@ def download_video(video_url):
             ydl.download([video_info['webpage_url']])
 
         print(f"{filename} succesfully downloaded")
+    except Exception as e:
+        print(f"Error while downloading video {video_url}: {e}")
+
+# As youtube-dl is discontinued, you can use this function to download with pytube alternatively
+def download_video_pytube(video_url):
+    target_path = os.path.join(sys.path[0],'videos')
+    try:
+        yt = YouTube(video_url,on_progress_callback=on_progress).streams.filter(only_audio=True,adaptive=True).order_by('abr').desc().first()
+        out_file = yt.download(output_path=target_path)
+        base, ext = os.path.splitext(out_file)
+        new_file = base + '.mp3'
+        os.rename(out_file, new_file)
     except Exception as e:
         print(f"Error while downloading video {video_url}: {e}")
 
@@ -74,6 +90,6 @@ def download_list(list_filepath):
     # with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
     #     executor.map(download_video,videos)
     for video in videos:
-        download_video(video)
+        download_video_pytube(video)
 
 download_list("url_list.txt")
