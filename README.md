@@ -16,13 +16,13 @@ Tiny script to convert a list of youtube videos to mp3. The list should be store
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/nushen96/youtube_list_to_mp3.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd youtube_list_to_mp3
 ```
 
 Install dependencies
